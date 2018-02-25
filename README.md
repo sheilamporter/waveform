@@ -4,6 +4,7 @@ i made a highly specific thing for my awesome brother.
 hey kiddo,
 
 run WaveformGenerator.bat and it should do what you want.
+you can change some stuff in config.py if you want, hopefully it's self-explanatory.
 there's some error cases that aren't handled very gracefully yet but this should do most of what you need.
 i'll keep working on it and post updates here.
 i'll also add a better readme someday, probably.
