@@ -1,0 +1,37 @@
+- index labels on input rows (start at 1)
+- ignore empty rows, throw error for half-empty rows
+- removing last row is fine, no need to remove arbitrary rows
+- confirmation before overwriting existing output file
+- make it so data doesn't need to be entered in sequential order
+- user doesn't specify file extension
+- amp = 2 * <max voltage after conversion>
+- start and end at zero
+
+todo: refactor "file name" to "file path"
+todo: error popup if couldn't open/write to file
+todo: figure out progress/done/whatever situation
+
+ok so to figure out the time values for each sample point on the curve i'm basically dividing the duration by the number of samples, right?
+but your input values might not match exactly with the any of the sample time values
+like, for example, say the input says we should be 100 degrees at the 13 second mark, but the actual samples skip from 12.8 seconds to 13.1 seconds
+there's a couple things i can do at this point
+1) disrupt the even spacing of the sample times by just jamming in a datapoint of 100 degrees at the 13 second mark
+2) put the input temperature at the closest sample timestamp (so, in this example, 100 degrees at the 13.1 second mark)
+3) don't use the exact input temperature at all and just sort of magically interpolate around it, so the temp at 12.8 seconds will be like 99.3 and at 13.1 it will be like 99.8 or whatever
+what's yer preference?
+OPTION 3. rewrite for this.
+
+NO: (temp2 - temp1) / (time2 - time1) + time1
+
+YES: ( (nextTemp - prevTemp) /  (nextTime - prevTime) ) * (currTime - prevTime) + prevTemp
+
+header:
+data lenght, offset, phase all constant
+frequency = 1 / duration
+amp = 2 * highest voltage
+timestamp in seconds in scientific notation,voltage
+
+polishy things:
+- enter activates buttons
+- progress widget
+- scrollbar for entries
